@@ -17,13 +17,13 @@ namespace OLES.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Lecturer")]
+     //   [Authorize(Roles = "Lecturer")]
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
-        [Authorize(Roles = "Lecturer")]
+      //  [Authorize(Roles = "Lecturer")]
         [HttpPost]
         public ActionResult Create(Test test)
         {
@@ -60,6 +60,27 @@ namespace OLES.Controllers
             currentUser.Tests.Add(test);
             DbFactory.TeacherCRUD.Update(currentUser._id, currentUser);
             return View();
+        }
+
+        public ActionResult CreateQuestion()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult CreateQuestion(Question question)
+        {
+            return PartialView();
+        }
+        public ActionResult CreateAnswer()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult CreateAnswer(List<Answer> answers)
+        {
+          
+            
+            return PartialView();
         }
     }
 }

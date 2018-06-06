@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Web.Mvc;
 
 namespace OLESClass
 {
     public abstract class DbObject : IDisposable
     {
         // ReSharper disable once InconsistentNaming
+        [HiddenInput(DisplayValue = false)]
         public string _id { get; set; }
         public DateTime CreationDate { get; protected set; }
         public byte IsDeleted { get; protected set; }

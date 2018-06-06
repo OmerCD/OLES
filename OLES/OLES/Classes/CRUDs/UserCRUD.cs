@@ -14,6 +14,7 @@ namespace OLES.Classes.CRUDs
     {
         public User CheckLogin(User user)
         {
+
             var filter = new BsonDocument { { "UserName", user.UserName }, { "Password", user.Password } };
             var cursor = Table.FindSync(filter);
             cursor.MoveNext();
@@ -39,6 +40,15 @@ namespace OLES.Classes.CRUDs
             return null;
         }
 
+        public bool CheckColumn(string column,string value)
+        {
+            var filter = new BsonDocument{{column, value } };
+            var cursor = Table.FindSync(filter);
+            cursor.MoveNext();
+            var batch = cursor.Current;
+            var entity = batch.FirstOrDefault();
+            return entity != null;
+        }
         public override User GetOne(string userId)
         {
             var filter = new BsonDocument { { "_id", userId } };

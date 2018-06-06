@@ -9,6 +9,11 @@ namespace OLES.Classes.Database
 {
     public struct DbFactory
     {
+        /// <summary>
+        /// Sets up the MongoDB connection of the program. Should be called when the porject starts.
+        /// </summary>
+        /// <param name="serverIP"></param>
+        /// <returns></returns>
         public static async Task<bool> SetConnection(string serverIP)
         {
             var port = "27017";

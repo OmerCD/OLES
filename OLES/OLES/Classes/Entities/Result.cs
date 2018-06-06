@@ -8,7 +8,7 @@ namespace OLESClass
 
         public struct QuestionIndex
         {
-            public Test.Question Question { get; set; }
+            public Question Question { get; set; }
             public List<StudentAnswerIndex> StudentAnswerIndices { get; set; }
         }
         public struct StudentAnswerIndex

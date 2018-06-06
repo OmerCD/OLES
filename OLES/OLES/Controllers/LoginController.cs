@@ -22,16 +22,15 @@ namespace OLES.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+
             return View();
         }
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var currentUser = DbFactory.UserCRUD.CheckLogin(user);
-          
+            var currentUser = DbFactory.UserCRUD.CheckLogin(user);        
             if (currentUser != null)
             {
-                
                 CustomAuth auth = new CustomAuth(currentUser);
                 if (HttpContext.User != null)
                 {
