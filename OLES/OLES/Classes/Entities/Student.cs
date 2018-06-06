@@ -5,6 +5,11 @@ namespace OLESClass
     public class Student : User
     {
         public List<StudentResult> PrevStudentResults { get; set; }
+
+        public Student()
+        {
+            PrevStudentResults = new List<StudentResult>();
+        }
     }
     public class StudentResult
     {

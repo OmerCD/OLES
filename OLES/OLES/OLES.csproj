@@ -173,6 +173,7 @@
     <Compile Include="Classes\Entities\Test.cs" />
     <Compile Include="Classes\Entities\User.cs" />
     <Compile Include="Classes\GlobalVariables.cs" />
+    <Compile Include="Classes\SiteRoleProvider.cs" />
     <Compile Include="Classes\Startup.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -186,11 +187,11 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Test\Create.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Test\Delete.cshtml" />
     <Content Include="Views\Test\Update.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using OLES.Classes;
+using OLES.Classes.Database;
 using OLESClass;
 
 namespace OLES.Controllers
 {
-    [Authorize(Roles = "Lecturer")]
+    
     public class TestController : Controller
     {
         // GET: Test
@@ -16,12 +17,13 @@ namespace OLES.Controllers
         {
             return View();
         }
+        [Authorize(Roles = "Lecturer")]
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Roles = "Lecturer")]
         [HttpPost]
         public ActionResult Create(Test test)
         {

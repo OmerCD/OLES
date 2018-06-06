@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using OLES.Classes.CRUDs;
+using OLESClass;
 
-namespace OLESClass
+namespace OLES.Classes.Database
 {
     public struct DbFactory
     {

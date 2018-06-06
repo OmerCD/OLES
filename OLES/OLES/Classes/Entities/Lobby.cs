@@ -8,6 +8,9 @@ namespace OLESClass
         public List<Student> WaitingStudents { get; set; }
         public Test Test { get; set; }
         public int WaitingCount => WaitingStudents.Count;
+        public int MaximumStudentCount { get; set; }
+        public int Time { get; set; }
+        public int QuestionPoolCount { get; set; }
 
         public bool AddStudent(Student student)
         {

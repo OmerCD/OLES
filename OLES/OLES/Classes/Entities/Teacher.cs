@@ -11,5 +11,12 @@ namespace OLESClass
         {
             return new Lobby { Name = lobbyName, Test = test };
         }
+
+        public Teacher()
+        {
+            Tests = new List<Test>();
+            Categories = new List<Category>();
+            PreviousResults = new List<Result>();
+        }
     }
 }

@@ -6,7 +6,8 @@ namespace OLESClass
     {
         public List<Question> Questions { get; set; }
         public string Name { get; set; }
-
+        public int Time { get; set; }
+        public int QuestionPoolCount { get; set; }
         public class Question : DbObject
         {
             public Category Category { get; set; }
