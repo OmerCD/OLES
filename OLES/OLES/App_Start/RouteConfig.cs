@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using OLESClass;
 
 namespace OLES
 {
@@ -11,6 +12,7 @@ namespace OLES
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            DbFactory.SetConnection("127.0.0.1");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(

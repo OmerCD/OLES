@@ -155,7 +155,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Classes\CRUDs\CRUD.cs" />
+    <Compile Include="Classes\CRUDs\UserCRUD.cs" />
+    <Compile Include="Classes\CustomAuth.cs" />
+    <Compile Include="Classes\Database\DbFactory.cs" />
+    <Compile Include="Classes\Entities\Category.cs" />
+    <Compile Include="Classes\Entities\DbObject.cs" />
+    <Compile Include="Classes\CRUDs\LobbyCRUD.cs" />
+    <Compile Include="Classes\Entities\Lobby.cs" />
+    <Compile Include="Classes\Entities\FinishedTest.cs" />
+    <Compile Include="Classes\CRUDs\StudentCRUD.cs" />
+    <Compile Include="Classes\CRUDs\TeacherCRUD.cs" />
+    <Compile Include="Classes\CRUDs\TestCRUD.cs" />
+    <Compile Include="Classes\Entities\Result.cs" />
+    <Compile Include="Classes\Entities\Student.cs" />
+    <Compile Include="Classes\Entities\Teacher.cs" />
+    <Compile Include="Classes\Entities\Test.cs" />
+    <Compile Include="Classes\Entities\User.cs" />
+    <Compile Include="Classes\GlobalVariables.cs" />
+    <Compile Include="Classes\Startup.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -164,6 +186,11 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Test\Create.cshtml" />
+    <Content Include="Views\Register\Register.cshtml" />
+    <Content Include="Views\Test\Delete.cshtml" />
+    <Content Include="Views\Test\Update.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

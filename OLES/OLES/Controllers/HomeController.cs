@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace OLES.Controllers
 {
+    [Authorize(Roles = "Lecturer,User")]
     public class HomeController : Controller
     {
         // GET: Home
