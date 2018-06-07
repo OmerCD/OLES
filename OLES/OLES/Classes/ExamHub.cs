@@ -46,13 +46,18 @@ namespace OLES.Classes
             // Call the broadcastMessage method to update clients.
             Clients.All.broadcastMessage(name, message);
         }
+
+        public void SendAnsweredQuestionToServer(string questionId, string answered, string ownerId)
+        {
+            var studentId = HttpContext.Current.User.Identity.Name;
+            Clients.User(ownerId).broadcastMessage(studentId, questionId, answered);
+        }
         public override Task OnConnected()
         {
             var currentUser = DbFactory.UserCRUD.GetOne(HttpContext.Current.User.Identity.Name);
-            switch (currentUser)
+            if (currentUser is Teacher)
             {
-                case Teacher _:
-                    Groups.Add(Context.ConnectionId, "123456"); break;
+                Groups.Add(Context.ConnectionId, "123456");
             }
 
             return base.OnConnected();

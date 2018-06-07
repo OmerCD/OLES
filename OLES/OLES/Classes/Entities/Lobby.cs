@@ -27,7 +27,7 @@ namespace OLESClass
         [Required(ErrorMessage = "Please enter a number")]
         [Range(3, 250, ErrorMessage = "Number should be between 3 and 250")]
         public int QuestionPoolCount { get; set; }
-        public string LobbyOWner { get; set; }
+        public string LobbyOwner { get; set; }
         /// <summary>
         /// If current lobby does not contain the given student, this method will add student to the waiting list of the lobby
         /// </summary>

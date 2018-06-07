@@ -2,9 +2,13 @@
 
 @{
     ViewBag.Title = "SeeQuestion";
+    Layout = null;
 }
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.2.3.js"></script>
+<script src="~/signalr/hubs"></script>>
 
-<h2>SeeQuestion</h2>
+
 
 <div>
     @Html.BeginForm("SeeQuestion", "Question", FormMethod.Post)
@@ -17,21 +21,50 @@
         <dd>
             @Html.DisplayFor(model => model.QuestionString)
         </dd>
-        @foreach (var obj in Model.Answers)
-        {
-            ;
-            @obj.AnswerText
-            @Html.CheckBox(obj.AnswerText)
-        }
+        <div id="Warp">
+
+            @for (var i = 0; i < Model.Answers.Count; i++)
+            {
+                var obj = Model.Answers[i];
+                
+                @obj.AnswerText;
+                @*<div class="checkbox">
+                @Html.EditorFor(model => model.Answers[i].Checked)
+            </div>*@
+                <input type="checkbox" name="showAll" id="ChkbxShowAll" value="@obj.AnswerText" />
+
+
+            }
+        </div>
+        @Html.HiddenFor(Model => Model._id, new { htmlAttributes = new { id = "questionId" }})
+
+
     </dl>
 </div>
 @if (ViewBag.IsLast == true)
 {
-    <input type="submit" value="Finish" />
+    <input id="BtnFinish" type="submit" value="Finish" />
 }
 else if (ViewBag.IsLast == false)
 {
-    <input type="submit" value="Next" />
+    <input id="BtnNext" type="submit" value="Next" />
 
 }
     }
+    <script>
+        $("#BtnNext").click(function () {
+            var inputs = $("#Warp").find("input");
+            var answers = "";
+            $("#ChkbxShowAll:checked").each(function() {
+                answers+= $(this).val()+",";
+            });
+            var questionId = $("#questionId").val();
+            $.get('/Question/GetLobbyOwner', function (response) {
+                $.connection.hub.start().done(function () {
+                    chat.server.sendAnsweredQuestionToServer(questionId,answers,response);
+
+                });
+            });
+        });
+
+    </script>

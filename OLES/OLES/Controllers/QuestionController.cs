@@ -19,7 +19,9 @@ namespace OLES.Controllers
         [HttpGet]
         public ActionResult SeeQuestion()
         {
-            if (GlobalVariables.CurrentQuestions.Any())
+            Session["LastLobbyOwner"] = GlobalVariables.CurrentLobby.LobbyOwner;
+
+            if (GlobalVariables.CurrentQuestions != null && GlobalVariables.CurrentQuestions.Any())
             {
                 if (GlobalVariables.CurrentQuestions.Count == 1)
                 {
@@ -30,6 +32,7 @@ namespace OLES.Controllers
                     ViewBag.IsLast = false;
                 }
                 var currentQuest = GlobalVariables.CurrentQuestions.Dequeue();
+                Session["LastQuestionId"] = currentQuest._id;
                 return View(currentQuest);
             }
             return null;
@@ -38,9 +41,12 @@ namespace OLES.Controllers
         [HttpPost]
         public ActionResult SeeQuestion(FormCollection answers)
         {
+            Session["GivenAnswers"] = answers;
+            Session["LastLobbyOwner"] = GlobalVariables.CurrentLobby.LobbyOwner;
             //todo get answer
             //todo send question answer to the liveResultScreen
             //todo
+            var neVerir = answers["showAll"].Split(',');
             if (GlobalVariables.CurrentQuestions.Any())
             {
                 if (GlobalVariables.CurrentQuestions.Count == 1)
@@ -52,9 +58,17 @@ namespace OLES.Controllers
                     ViewBag.IsLast = false;
                 }
                 var currentQuest = GlobalVariables.CurrentQuestions.Dequeue();
+                Session["LastQuestionId"] = currentQuest._id;
                 return View(currentQuest);
             }
             return null;
+        }
+
+        public JsonResult GetLobbyOwner()
+        {
+            var lobbyOwner = (string)Session["LastLobbyOwner"];
+            
+            return Json(lobbyOwner, JsonRequestBehavior.AllowGet);
         }
     }
 }

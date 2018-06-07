@@ -15,7 +15,7 @@ namespace OLESClass
             {
                 Name = "123456",
                 Test = test,
-                LobbyOwner = HttpContext.User.Identity.Name;,
+                LobbyOwner = _id,
                 QuestionPoolCount = QuestionCount
             };//todo give a random name
         }

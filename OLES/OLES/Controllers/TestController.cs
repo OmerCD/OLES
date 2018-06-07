@@ -75,6 +75,7 @@ namespace OLES.Controllers
         [HttpPost]
         public ActionResult CreateQuestion(Question question, FormCollection answers)
         {
+            question._id = Guid.NewGuid().ToString();
             var questionTexts = answers["AnswerText"].Split(',');
             var questionAnswer = answers["Checked"].Split(',');
             for (int i = 0; i < questionTexts.Length; i++)

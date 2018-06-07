@@ -36,7 +36,7 @@ namespace OLESClass
         public byte[] Picture { get; set; }
         public List<Answer> Answers { get; set; }
 
-        public Question()
+        public Question():base()
         {
             Answers = new List<Answer>();
         }
