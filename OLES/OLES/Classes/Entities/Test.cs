@@ -13,13 +13,17 @@ namespace OLESClass
         public string Name { get; set; }
         [Display(Name = "Time Amount (minutes)")]
         [Required(ErrorMessage = "Please enter a time for test")]
-        [Range(5,240,ErrorMessage = "Time should be between 5 and 240 minutes")]
+        [Range(5, 240, ErrorMessage = "Time should be between 5 and 240 minutes")]
         public int Time { get; set; }
         [Display(Name = "Number of questions per exam")]
         [Required(ErrorMessage = "Please enter a number")]
         [Range(3, 250, ErrorMessage = "Number should be between 3 and 250")]
         public int QuestionPoolCount { get; set; }
-       
+
+        public Test()
+        {
+            Questions = new List<Question>();
+        }
     }
     public class Question : DbObject
     {
@@ -31,9 +35,20 @@ namespace OLESClass
         public string QuestionString { get; set; }
         public byte[] Picture { get; set; }
         public List<Answer> Answers { get; set; }
+
+        public Question()
+        {
+            Answers = new List<Answer>();
+        }
     }
     public class Answer : DbObject
     {
+        public Answer(string answerText, bool checkedVariable)
+        {
+            AnswerText = answerText;
+            Checked = checkedVariable;
+        }
+
         [Display(Name = "Answer")]
         [Required(ErrorMessage = "Please enter an answer")]
         public string AnswerText { get; set; }

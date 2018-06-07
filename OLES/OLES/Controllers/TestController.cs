@@ -9,28 +9,34 @@ using OLESClass;
 
 namespace OLES.Controllers
 {
-    
+
     public class TestController : Controller
     {
         // GET: Test
         public ActionResult Index()
         {
-            return View();
+            Teacher currentUser = (DbFactory.TeacherCRUD.GetOne(HttpContext.User.Identity.Name));
+            return View(currentUser.Tests);
         }
-     //   [Authorize(Roles = "Lecturer")]
+        //   [Authorize(Roles = "Lecturer")]
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.CurrentTest = GlobalVariables.CurrentTest;
             return View();
+
         }
-      //  [Authorize(Roles = "Lecturer")]
+
+        //  [Authorize(Roles = "Lecturer")]
         [HttpPost]
         public ActionResult Create(Test test)
         {
-            Teacher currentUser = (Teacher)(HttpContext.User as CustomAuth).User;
+            Teacher currentUser = (DbFactory.TeacherCRUD.GetOne(HttpContext.User.Identity.Name));
+            test.Questions = GlobalVariables.CurrentTest.Questions;
             currentUser.Tests.Add(test);
+
             DbFactory.TeacherCRUD.Update(currentUser._id, currentUser);
-            return View();
+            return RedirectToAction("Index","Test");
         }
         [HttpGet]
         public ActionResult Delete()
@@ -41,7 +47,7 @@ namespace OLES.Controllers
         [HttpPost]
         public ActionResult Delete(string _id)
         {
-            Teacher currentUser = (Teacher)(HttpContext.User as CustomAuth)?.User;
+            Teacher currentUser = (DbFactory.TeacherCRUD.GetOne(HttpContext.User.Identity.Name));
             currentUser.Tests.Remove(currentUser.Tests.FirstOrDefault(x => x._id == _id));
             DbFactory.TeacherCRUD.Update(currentUser._id, currentUser);
             return View();
@@ -53,9 +59,9 @@ namespace OLES.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(string _id,Test test)
+        public ActionResult Update(string _id, Test test)
         {
-            Teacher currentUser = (Teacher)(HttpContext.User as CustomAuth)?.User;
+            Teacher currentUser = (DbFactory.TeacherCRUD.GetOne(HttpContext.User.Identity.Name));
             currentUser.Tests.Remove(currentUser.Tests.FirstOrDefault(x => x._id == _id));
             currentUser.Tests.Add(test);
             DbFactory.TeacherCRUD.Update(currentUser._id, currentUser);
@@ -67,20 +73,27 @@ namespace OLES.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult CreateQuestion(Question question)
+        public ActionResult CreateQuestion(Question question, FormCollection answers)
         {
-            return PartialView();
+            var questionTexts = answers["AnswerText"].Split(',');
+            var questionAnswer = answers["Checked"].Split(',');
+            for (int i = 0; i < questionTexts.Length; i++)
+            {
+                var currentAnswer = new Answer(questionTexts[i], Convert.ToBoolean(questionAnswer[i]));
+                question.Answers.Add(currentAnswer);
+            }
+            GlobalVariables.CurrentTest.Questions.Add(question);
+            return RedirectToAction("Create", "Test");
         }
         public ActionResult CreateAnswer()
         {
             return PartialView();
         }
         [HttpPost]
-        public ActionResult CreateAnswer(List<Answer> answers)
+        public ActionResult CreateAnswer(FormCollection answers)
         {
-          
-            
-            return PartialView();
+
+            return null;
         }
     }
 }

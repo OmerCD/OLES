@@ -158,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Classes\ConnectionMapping.cs" />
     <Compile Include="Classes\CRUDs\CRUD.cs" />
     <Compile Include="Classes\CRUDs\UserCRUD.cs" />
     <Compile Include="Classes\CustomAuth.cs" />
@@ -175,11 +176,15 @@
     <Compile Include="Classes\Entities\Teacher.cs" />
     <Compile Include="Classes\Entities\Test.cs" />
     <Compile Include="Classes\Entities\User.cs" />
+    <Compile Include="Classes\ExamHub.cs" />
     <Compile Include="Classes\GlobalVariables.cs" />
     <Compile Include="Classes\SiteRoleProvider.cs" />
     <Compile Include="Classes\Startup.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LiveResultController.cs" />
+    <Compile Include="Controllers\LobbyController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -197,6 +202,12 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Test\CreateQuestion.cshtml" />
     <Content Include="Views\Test\CreateAnswer.cshtml" />
+    <Content Include="Views\Question\SeeQuestion.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Home\TestIt.cshtml" />
+    <Content Include="Views\Lobby\SeeLobies.cshtml" />
+    <Content Include="Views\Lobby\Index.cshtml" />
+    <Content Include="Views\Lobby\CreateLobby.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -207,6 +218,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\LiveResult\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

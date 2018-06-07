@@ -5,6 +5,7 @@ namespace OLESClass
     public class Student : User
     {
         public List<StudentResult> PrevStudentResults { get; set; }
+        public Lobby EnteredLobby { get; set; }
 
         public Student()
         {

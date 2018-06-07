@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web.UI.WebControls;
 using MongoDB.Bson.Serialization.Serializers;
+using OLES.Classes;
 
 namespace OLESClass
 {
@@ -24,6 +27,7 @@ namespace OLESClass
         [Required(ErrorMessage = "Please enter a number")]
         [Range(3, 250, ErrorMessage = "Number should be between 3 and 250")]
         public int QuestionPoolCount { get; set; }
+        public string LobbyOWner { get; set; }
         /// <summary>
         /// If current lobby does not contain the given student, this method will add student to the waiting list of the lobby
         /// </summary>
@@ -32,38 +36,39 @@ namespace OLESClass
         public bool AddStudent(Student student)
         {
             if (WaitingStudents.Contains(student)) return false;
+            student.EnteredLobby = this;
             WaitingStudents.Add(student);
             return true;
 
         }
 
-        public void AssignTests()
+        public Queue<Question> AssignTests()
         {
-            if (Test.Questions.Count<Test.QuestionPoolCount)
+            if (Test.Questions.Count < QuestionPoolCount)
             {
                 //todo throw exception
             }
             Random random = new Random();
-            for (int i = 0; i < WaitingCount; i++)
+
+            Queue<Question> questions = new Queue<Question>();
+            HashSet<int> popedQuestions = new HashSet<int>();
+            int j = 0;
+            while (j < QuestionPoolCount)
             {
-                HashSet<Question> questions = new HashSet<Question>();
-                HashSet<int> popedQuestions = new HashSet<int>();
-                int j = 0;
-                while (j<QuestionPoolCount)
+                var ranNum = random.Next(QuestionPoolCount);
+                if (!popedQuestions.Contains(ranNum))
                 {
-                    var ranNum = random.Next(QuestionPoolCount);
-                    if (!popedQuestions.Contains(ranNum))
-                    {
-                        popedQuestions.Add(ranNum);
-                        questions.Add(Test.Questions[ranNum]);
-                        j++;
-                    }
+                    popedQuestions.Add(ranNum);
+                    questions.Enqueue(Test.Questions[ranNum]);
+                    j++;
                 }
             }
+
+            return questions;
         }
-        public bool StartExam()
+        public bool AssignGlobalQuestionVariable()
         {
-            //todo Put exam system here
+            GlobalVariables.CurrentQuestions = AssignTests();
             return false;
         }
     }

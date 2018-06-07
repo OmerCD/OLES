@@ -3,24 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using OLES.Classes;
 
 namespace OLES.Controllers
 {
-    [Authorize(Roles = "Lecturer,Student")]
-    public class HomeController : Controller
+    public class LiveResultController : Controller
     {
-        // GET: Home
+        // GET: LiveResult
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult TestIt()
-        {
-            return View();
-        }
-      
-
     }
 }

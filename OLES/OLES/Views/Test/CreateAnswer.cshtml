@@ -1,16 +1,15 @@
 ﻿@model OLESClass.Answer
-
-@using (Html.BeginForm("CreateAnswer","Test",FormMethod.Post))
+@using (Html.BeginForm("CreateAnswer", "Test", FormMethod.Post))
 {
 @Html.AntiForgeryToken()
 
 <input type="number" id="questionCount" name="quantity" min="1" max="10" />
-
 <div class="form-horizontal">
     <table id="AnswersTable">
         <tr>
             <td>
                 <div class="form-group">
+                    @Html.HiddenFor(model => model._id, null)
                     @Html.LabelFor(model => model.AnswerText, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.AnswerText, new { htmlAttributes = new { @class = "form-control" } })
@@ -20,7 +19,8 @@
             </td>
             <td>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Checked, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                    @Html.LabelFor(model => model, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <div class="checkbox">
                             @Html.EditorFor(model => model.Checked)
@@ -30,15 +30,10 @@
                 </div>
             </td>
         </tr>
-
     </table>
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
+
     </div>
-
-
 
 
 </div>
@@ -50,15 +45,13 @@
 <script src="/scripts/jquery.validate.min.js" type="text/javascript"></script>
 <script src="/scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
 <script>
-    var text =  $('#AnswersTable').html();
-    alert(text);
-    $('#questionCount').bind('click keyup', function(){
-       var count = $(this).val();
-    var insideText = "";
-    for(var i = 0; i< count;i++){
-        insideText +=text;
-    }
-     $('#AnswersTable').html(insideText);
-
-});
+    var text = $('#AnswersTable').html();
+    $('#questionCount').bind('click keyup', function () {
+        var count = $(this).val();
+        var insideText = "";
+        for (var i = 0; i < count; i++) {
+            insideText += text;
+        }
+        $('#AnswersTable').html(insideText);
+    });
 </script>

@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Web;
 
 namespace OLESClass
 {
@@ -7,9 +9,15 @@ namespace OLESClass
         public List<Test> Tests { get; set; }
         public List<Category> Categories { get; set; }
         public List<Result> PreviousResults { get; set; }
-        public Lobby CreateLobby(string lobbyName, Test test)
+        public Lobby CreateLobby(Test test, int QuestionCount)
         {
-            return new Lobby { Name = lobbyName, Test = test };
+            return new Lobby
+            {
+                Name = "123456",
+                Test = test,
+                LobbyOwner = HttpContext.User.Identity.Name;,
+                QuestionPoolCount = QuestionCount
+            };//todo give a random name
         }
 
         public Teacher()
